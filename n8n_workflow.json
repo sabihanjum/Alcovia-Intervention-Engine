@@ -1,0 +1,141 @@
+{
+  "name": "Alcovia Student Intervention Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "student-intervention",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook - Student Failed",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "student-intervention"
+    },
+    {
+      "parameters": {
+        "fromEmail": "mentor@alcovia.com",
+        "toEmail": "={{ $json.student_email }}",
+        "subject": "🚨 Student Intervention Required - {{ $json.student_name }}",
+        "emailType": "html",
+        "message": "=<h2>Student Needs Attention</h2>\n<p><strong>Student:</strong> {{ $json.student_name }} (ID: {{ $json.student_id }})</p>\n<p><strong>Quiz Score:</strong> {{ $json.quiz_score }}/10</p>\n<p><strong>Focus Time:</strong> {{ $json.focus_minutes }} minutes</p>\n<p><strong>Status:</strong> Below threshold - Intervention required</p>\n<hr>\n<p>Please review and assign a remedial task:</p>\n<p><a href=\"{{ $env.APPROVAL_URL }}?student_id={{ $json.student_id }}&action=approve\" style=\"background: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 10px 5px;\">Assign Task: Read Chapter 4</a></p>\n<p><a href=\"{{ $env.APPROVAL_URL }}?student_id={{ $json.student_id }}&action=custom\" style=\"background: #6c757d; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 10px 5px;\">Custom Task</a></p>"
+      },
+      "id": "send-email",
+      "name": "Send Email to Mentor",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {
+          "limit": 1
+        }
+      },
+      "id": "wait-approval",
+      "name": "Wait for Mentor Approval",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "webhookId": "mentor-approval"
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.BACKEND_URL }}/api/assign-intervention",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "student_id",
+              "value": "={{ $json.student_id }}"
+            },
+            {
+              "name": "task_description",
+              "value": "={{ $json.task || 'Read Chapter 4 and complete practice exercises' }}"
+            },
+            {
+              "name": "mentor_notes",
+              "value": "={{ $json.notes || 'Focus on understanding core concepts' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "assign-intervention",
+      "name": "Assign Intervention to Student",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"message\": \"Intervention assigned successfully\" } }}"
+      },
+      "id": "webhook-response",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Student Failed": {
+      "main": [
+        [
+          {
+            "node": "Send Email to Mentor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email to Mentor": {
+      "main": [
+        [
+          {
+            "node": "Wait for Mentor Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for Mentor Approval": {
+      "main": [
+        [
+          {
+            "node": "Assign Intervention to Student",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assign Intervention to Student": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-23T00:00:00.000Z",
+  "versionId": "1"
+}
