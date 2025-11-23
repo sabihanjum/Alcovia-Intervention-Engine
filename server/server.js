@@ -9,15 +9,27 @@ const pool = require('./db');
 
 const app = express();
 const server = http.createServer(app);
+const allowedOrigins = [
+  'https://alcovia-intervention-engine-1.onrender.com',
+  'http://localhost:3000'
+];
+
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || '*',
-    methods: ['GET', 'POST']
+    origin: allowedOrigins,
+    methods: ['GET', 'POST'],
+    credentials: true
   }
 });
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
