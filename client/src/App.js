@@ -91,7 +91,19 @@ function App() {
       setLoading(false);
     } catch (error) {
       console.error('Error fetching student data:', error);
+      // Set mock data if API fails
+      setStudentData({
+        student: {
+          id: 1,
+          student_id: STUDENT_ID,
+          name: 'Demo Student',
+          email: 'demo@alcovia.edu',
+          status: 'On Track'
+        },
+        pendingIntervention: null
+      });
       setLoading(false);
+      setMessage('⚠️ Running in offline mode. Backend not connected.');
     }
   };
 
@@ -176,6 +188,16 @@ function App() {
       <div className="app">
         <div className="container">
           <div className="loading">Loading...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!studentData) {
+    return (
+      <div className="app">
+        <div className="container">
+          <div className="loading">Error loading data. Please refresh.</div>
         </div>
       </div>
     );
