@@ -15,11 +15,11 @@
 6. Click "Submit Check-in"
 
 **Expected Results**:
-- ✅ Status remains "On Track"
-- ✅ Success message displayed
-- ✅ No email sent
-- ✅ No n8n workflow triggered
-- ✅ App remains unlocked
+-  Status remains "On Track"
+-  Success message displayed
+-  No email sent
+-  No n8n workflow triggered
+-  App remains unlocked
 
 **Database Verification**:
 ```sql
@@ -43,13 +43,13 @@ SELECT status FROM students WHERE student_id = '123';
 4. Click "Submit Check-in"
 
 **Expected Results**:
-- ✅ App immediately locks
-- ✅ Shows "Analysis in Progress" screen
-- ✅ Displays "Waiting for Mentor..." message
-- ✅ Spinner animation visible
-- ✅ All input fields disabled
-- ✅ n8n webhook triggered
-- ✅ Email sent to mentor
+-  App immediately locks
+-  Shows "Analysis in Progress" screen
+-  Displays "Waiting for Mentor..." message
+-  Spinner animation visible
+-  All input fields disabled
+-  n8n webhook triggered
+-  Email sent to mentor
 
 **Database Verification**:
 ```sql
@@ -83,11 +83,11 @@ SELECT * FROM daily_logs ORDER BY logged_at DESC LIMIT 1;
 4. Click "Assign Task: Read Chapter 4" button
 
 **Expected Results**:
-- ✅ n8n workflow resumes
-- ✅ Backend receives POST to /assign-intervention
-- ✅ Database updated with intervention record
-- ✅ Student status changes to "Remedial Task"
-- ✅ WebSocket emits update to client
+-  n8n workflow resumes
+-  Backend receives POST to /assign-intervention
+-  Database updated with intervention record
+-  Student status changes to "Remedial Task"
+-  WebSocket emits update to client
 
 **Database Verification**:
 ```sql
@@ -112,12 +112,12 @@ SELECT status FROM students WHERE student_id = '123';
 3. Watch the app WITHOUT refreshing
 
 **Expected Results**:
-- ✅ App unlocks instantly (within 1 second)
-- ✅ Lock screen disappears
-- ✅ Remedial task screen appears
-- ✅ Task description visible
-- ✅ "Mark Complete" button enabled
-- ✅ No page refresh required
+-  App unlocks instantly (within 1 second)
+-  Lock screen disappears
+-  Remedial task screen appears
+-  Task description visible
+-  "Mark Complete" button enabled
+-  No page refresh required
 
 **Browser Console Verification**:
 ```
@@ -138,11 +138,11 @@ Intervention assigned: {intervention: {...}}
 2. Click "Mark Complete" button
 
 **Expected Results**:
-- ✅ Success message displayed
-- ✅ Status returns to "On Track"
-- ✅ Normal interface restored
-- ✅ Focus timer available again
-- ✅ Check-in form available
+-  Success message displayed
+-  Status returns to "On Track"
+-  Normal interface restored
+-  Focus timer available again
+-  Check-in form available
 
 **Database Verification**:
 ```sql
@@ -167,11 +167,11 @@ SELECT status FROM students WHERE student_id = '123';
 5. Return to app tab
 
 **Expected Results**:
-- ✅ Timer stops immediately
-- ✅ Warning message: "Timer failed! Tab switching detected"
-- ✅ Session marked as failed
-- ✅ Focus minutes not recorded
-- ✅ Penalty logged
+-  Timer stops immediately
+-  Warning message: "Timer failed! Tab switching detected"
+-  Session marked as failed
+-  Focus minutes not recorded
+-  Penalty logged
 
 **Browser Console Verification**:
 ```
