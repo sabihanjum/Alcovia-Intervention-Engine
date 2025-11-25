@@ -142,7 +142,7 @@ APPROVAL_URL=https://your-instance.app.n8n.cloud/webhook/mentor-approval
 
 Go to Render and update `N8N_WEBHOOK_URL` with your webhook URL.
 
-## 🔗 Step 5: Connect Everything
+## Step 5: Connect Everything
 
 ### Update All URLs
 
@@ -177,7 +177,7 @@ Go to Render and update `N8N_WEBHOOK_URL` with your webhook URL.
 2. Create API key
 3. Use SendGrid node in n8n instead of Email node
 
-## 🧪 Testing Production
+## Testing Production
 
 ### Test Checklist
 
@@ -218,7 +218,7 @@ curl -X POST https://your-n8n.app.n8n.cloud/webhook/student-intervention \
 - Verify FRONTEND_URL in backend
 - Check browser console for WebSocket errors
 
-## 🚀 Performance Optimization
+## Performance Optimization
 
 ### Backend
 - Enable connection pooling (already configured)
@@ -237,7 +237,7 @@ CREATE INDEX idx_student_id ON daily_logs(student_id);
 CREATE INDEX idx_intervention_status ON interventions(student_id, status);
 ```
 
-## 📊 Monitoring
+## Monitoring
 
 ### Backend Monitoring
 - Render provides logs and metrics
