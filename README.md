@@ -2,7 +2,7 @@
 
 A full-stack closed-loop system that detects when students are falling behind and automatically triggers a mentorship intervention workflow.
 
-## 🎯 System Overview
+## System Overview
 
 This system implements a **Human-in-the-Loop** architecture where:
 1. **Student App** (React) - Real-time interface with focus tracking and state management
@@ -10,7 +10,7 @@ This system implements a **Human-in-the-Loop** architecture where:
 3. **Automation Workflow** (n8n) - Mentor notification and approval system
 4. **Real-time Communication** (WebSockets) - Instant updates without polling
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 Student App (React)
@@ -27,7 +27,7 @@ Backend Updates DB
 Student App Unlocks (Real-time)
 ```
 
-## 📊 Database Schema
+## Database Schema
 
 ### Students Table
 - `id` - Primary key
@@ -65,7 +65,7 @@ if (quiz_score > 7 AND focus_minutes > 60) {
 }
 ```
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - Node.js 16+
@@ -126,7 +126,7 @@ npm start
 4. Activate the workflow
 5. Copy the webhook URL and update your backend `.env`
 
-## 🎮 Testing the Flow
+## Testing the Flow
 
 ### Test Case 1: Student Fails Check-in
 
@@ -155,7 +155,7 @@ npm start
 2. Switch to another tab or minimize browser
 3. **Expected Result**: Timer fails immediately with penalty message
 
-## 🛡️ Fail-Safe Mechanism (System Design Answer)
+## Fail-Safe Mechanism (System Design Answer)
 
 ### The Problem
 If a mentor doesn't respond within 12 hours, the student remains locked out indefinitely.
@@ -195,19 +195,19 @@ interventions.auto_assigned (boolean)
 - **Student Communication**: Send app notification explaining delay and estimated unlock time
 - **Async Learning**: While locked, allow access to read-only study materials
 
-## 🌟 Bonus Features Implemented
+##  Bonus Features Implemented
 
-### 1. Cheater Detection ✅
+### 1. Cheater Detection 
 - Uses `visibilitychange` event to detect tab switching
 - Automatically fails focus session if student switches tabs
 - Logs penalty in the system
 
-### 2. Real-Time WebSockets ✅
+### 2. Real-Time WebSockets 
 - Socket.io integration for instant updates
 - Student app unlocks immediately when mentor assigns task
 - No polling required - true real-time experience
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 alcovia-intervention-engine/
@@ -231,7 +231,7 @@ alcovia-intervention-engine/
 └── README.md
 ```
 
-## 🚢 Deployment Guide
+##  Deployment Guide
 
 ### Backend (Railway/Render)
 
@@ -261,7 +261,7 @@ alcovia-intervention-engine/
 3. Configure credentials
 4. Activate workflow
 
-## 🔗 API Endpoints
+## API Endpoints
 
 ### GET /api/student/:studentId
 Get student status and pending interventions
@@ -295,7 +295,7 @@ Mark task as complete
 }
 ```
 
-## 🎥 Demo Video Script
+## Demo Video Script
 
 1. **Intro** (30s): Show app in normal state, explain the system
 2. **Failure Flow** (1m): Submit bad score, show lockout
@@ -304,7 +304,7 @@ Mark task as complete
 5. **Real-time Unlock** (1m): Show app unlock instantly via WebSocket
 6. **Task Completion** (30s): Complete task, return to normal state
 
-## 🧪 Testing Checklist
+## Testing Checklist
 
 - [ ] Student can submit successful check-in (score > 7, time > 60)
 - [ ] Student can submit failed check-in (triggers intervention)
@@ -319,7 +319,7 @@ Mark task as complete
 - [ ] Tab switching detection works
 - [ ] Timer tracks focus time accurately
 
-## 📝 Technical Decisions
+## Technical Decisions
 
 ### Why PostgreSQL over NoSQL?
 - ACID compliance for critical state transitions
@@ -336,14 +336,14 @@ Mark task as complete
 - Easy to modify intervention logic without code changes
 - Built-in retry and error handling
 
-## 🤝 Contributing
+## Contributing
 
 This is a technical assessment project. For questions, contact the Alcovia team.
 
-## 📄 License
+## License
 
 MIT License - Built for Alcovia Full Stack Engineering Intern Assignment
 
 ---
 
-**Built with ❤️ for Alcovia** | Submission Deadline: 9pm, 24th November 2025
+**Built with for Alcovia** | Submission Deadline: 9pm, 24th November 2025
