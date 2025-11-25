@@ -53,7 +53,7 @@ Student App Unlocks (Real-time)
 - `assigned_at` - When task was assigned
 - `completed_at` - When student completed it
 
-## 🔐 The Logic Gate
+## The Logic Gate
 
 ```javascript
 if (quiz_score > 7 AND focus_minutes > 60) {
