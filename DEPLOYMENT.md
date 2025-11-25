@@ -2,7 +2,7 @@
 
 This guide will help you deploy the complete system to production.
 
-## 🗄️ Step 1: Database Setup (Supabase)
+## Step 1: Database Setup (Supabase)
 
 ### Create Database
 
@@ -25,7 +25,7 @@ Example:
 postgresql://postgres:[YOUR-PASSWORD]@db.xxx.supabase.co:5432/postgres
 ```
 
-## 🖥️ Step 2: Backend Deployment (Render)
+## Step 2: Backend Deployment (Render)
 
 ### Deploy to Render
 
@@ -58,7 +58,7 @@ NODE_ENV=production
 3. Copy your backend URL: `https://alcovia-backend.onrender.com`
 4. Test health endpoint: `https://alcovia-backend.onrender.com/health`
 
-## 🎨 Step 3: Frontend Deployment (Vercel)
+## Step 3: Frontend Deployment (Vercel)
 
 ### Deploy to Vercel
 
@@ -90,7 +90,7 @@ REACT_APP_API_URL=https://alcovia-backend.onrender.com
 
 Go back to Render and update `FRONTEND_URL` to your Vercel URL.
 
-## 🤖 Step 4: n8n Workflow Setup
+## Step 4: n8n Workflow Setup
 
 ### Option A: n8n Cloud (Recommended)
 
@@ -253,7 +253,7 @@ CREATE INDEX idx_intervention_status ON interventions(student_id, status);
 - Set up error notifications
 - Monitor webhook response times
 
-## 🔒 Security Checklist
+## Security Checklist
 
 - [ ] Database credentials in environment variables
 - [ ] CORS configured correctly
@@ -262,7 +262,7 @@ CREATE INDEX idx_intervention_status ON interventions(student_id, status);
 - [ ] HTTPS enabled (automatic on Render/Vercel)
 - [ ] Environment variables not committed to Git
 
-## 💰 Cost Estimate
+## Cost Estimate
 
 - **Supabase**: Free tier (500MB database, 2GB bandwidth)
 - **Render**: Free tier (750 hours/month)
@@ -271,7 +271,7 @@ CREATE INDEX idx_intervention_status ON interventions(student_id, status);
 
 **Total**: $0/month for this project scale
 
-## 🎥 Creating Demo Video
+## Creating Demo Video
 
 ### Recording Setup
 
@@ -296,7 +296,7 @@ CREATE INDEX idx_intervention_status ON interventions(student_id, status);
 2. Copy shareable link
 3. Add to submission form
 
-## 📝 Submission Checklist
+## Submission Checklist
 
 - [ ] Live app URL (Vercel)
 - [ ] Backend URL (Render)
@@ -307,7 +307,7 @@ CREATE INDEX idx_intervention_status ON interventions(student_id, status);
 - [ ] All features working
 - [ ] Bonus features implemented
 
-## 🆘 Support
+## Support
 
 If you encounter issues:
 
@@ -317,7 +317,7 @@ If you encounter issues:
 4. Review browser console for client errors
 5. Test each component independently
 
-## 🎉 You're Done!
+## You're Done!
 
 Your Alcovia Intervention Engine is now live and ready for testing!
 
